@@ -1,0 +1,45 @@
+version: '3.3'
+
+services:
+  db:
+    image: mariadb:latest
+    container_name: ${PROJECT}_db
+    restart: unless-stopped
+    volumes:
+      - mysql:/var/lib/mysql
+    networks:
+      - default
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
+      MYSQL_DATABASE: wp_${PROJECT}
+      MYSQL_USER: ${WPUSER}
+      MYSQL_PASSWORD: ${WPPASSWORD}
+
+  wordpress:
+    image: stevecliff/wpstandard:latest
+    container_name: ${PROJECT}
+    restart: unless-stopped
+    volumes:
+      - html:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - proxy
+      - default
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: ${WPUSER}
+      WORDPRESS_DB_NAME: wp_${PROJECT}
+      WORDPRESS_DB_PASSWORD: ${WPPASSWORD}
+      VIRTUAL_HOST: ${URL}
+      VIRTUAL_PORT: 80
+
+networks:
+  default:
+  proxy:
+    external:
+      name: proxyLAN
+
+volumes:
+  html:
+  mysql:
