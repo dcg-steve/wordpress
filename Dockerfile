@@ -1,4 +1,4 @@
-FROM wordpress:php7.1
+FROM wordpress:php7.2
 
 # Set up standard additions
 RUN apt-get update && apt-get install -y libldap2-dev zip sudo less zlib1g-dev
