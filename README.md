@@ -1,4 +1,4 @@
-# wpstandard
+# wordpress
 Standard Wordpress container (from wordpress:php7.1) with the following additions:
 
 - libldap2-dev added & initially configured (for LDAPS functionality)
