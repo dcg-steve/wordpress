@@ -16,7 +16,7 @@ services:
       MYSQL_PASSWORD: ${WPPASSWORD}
 
   wordpress:
-    image: dcg-steve/wordpress:latest
+    image: dcgsteve/wordpress:latest
     container_name: ${PROJECT}
     restart: unless-stopped
     volumes:

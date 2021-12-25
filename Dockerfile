@@ -1,4 +1,4 @@
-FROM wordpress:php7.4
+FROM wordpress:latest
 
 # Set up standard additions
 RUN apt-get update && \
